@@ -8,6 +8,7 @@ public class Game {
     private Player player1;
     private Player player2;
     private Player currentPlayer;
+    
     private Scanner scanner;
 
     public Game(Player player1 , Player player2) {
@@ -22,15 +23,31 @@ public class Game {
 
     public void start() {
         // main game loop
+       while (true) {
+         board=new Board();
+        currentPlayer=player1;
        
         
-        board.printBoard();
-
-        while (true) {
+           
+           while (true) {
+            board.printBoard();
             
         
         System.out.println("Current player " + currentPlayer.getName() + " symbol "  + currentPlayer.getSymbol());
          int row = -1, col = -1;
+         if(currentPlayer.isComputer()){
+            //code for computer move 
+            do{
+                row=(int) (Math.random()*3);
+                col= (int) (Math.random()*3);
+            }
+            while (!board.makeMove(row, col, currentPlayer.getSymbol()));
+
+              System.out.println("Computer chose: (" + row + ", " + col + ")");
+                switchPlayer();
+
+         }
+         else{
          while(true){
             try{
                 System.out.println("enter row");
@@ -47,6 +64,7 @@ public class Game {
                 }
 
             }
+        }
             boolean ok= takeTurn(row, col);
             if(ok==false){
             System.out.println("That cell is already occupied. Try a different cell.");
@@ -64,8 +82,14 @@ public class Game {
             }
             switchPlayer();
          }
+          System.out.println("Do you want to play again? (YES/NO)");
+        String ans = scanner.nextLine().trim();
+        if (!ans.equalsIgnoreCase("YES")) {
+            System.out.println("Thanks for playing!");
+            break; // exit outer loop
+        }
         }      
-    
+    }
     
     private void switchPlayer() {
         // toggle between player1 and player2
