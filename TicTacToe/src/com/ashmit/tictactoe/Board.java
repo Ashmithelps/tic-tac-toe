@@ -1,7 +1,8 @@
 package TicTacToe.src.com.ashmit.tictactoe;
 
 public class Board {
-
+//public static final String PURPLE = "\u001B[35m";
+//public static final String RESET = "\u001B[0m";
     private char[][] grid;  // 3x3 board
 
     public Board() {
@@ -20,12 +21,24 @@ public class Board {
 
     public void printBoard() {
         // print current state of the board
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.print(grid[i][j] + " ");
+        final String YELLOW = "\u001B[33m";     // for X
+    final String BLUE = "\u001B[34m";    // for O
+    final String PURPLE = "\u001B[35m";  // for empty cell '-'
+    final String RESET = "\u001B[0m";    // reset to default
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            char cell = grid[i][j];
+            if (cell == 'X') {
+                System.out.print(YELLOW + cell + " " + RESET);
+            } else if (cell == 'O') {
+                System.out.print(BLUE + cell + " " + RESET);
+            } else {
+                System.out.print(PURPLE + cell + " " + RESET);
             }
-            System.out.println();
         }
+        System.out.println();
+    }
     }
 
     public boolean makeMove(int row, int col, char symbol) {
