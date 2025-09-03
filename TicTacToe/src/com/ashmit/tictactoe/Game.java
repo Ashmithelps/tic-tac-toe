@@ -44,7 +44,7 @@ public class Game {
             while (!board.makeMove(row, col, currentPlayer.getSymbol()));
 
               System.out.println("Computer chose: (" + row + ", " + col + ")");
-                switchPlayer();
+               
 
          }
          else{
@@ -58,6 +58,10 @@ public class Game {
                         System.out.println("Row and column must be between 0 and 2. Try again.");
                         continue;
                     }
+                    if(!board.makeMove(row, col, currentPlayer.getSymbol())){
+                         System.out.println("That cell is already occupied. Try a different cell.");
+                    continue;
+                    }
                     break;
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input. Please enter numbers 0, 1, or 2.");
@@ -65,11 +69,12 @@ public class Game {
 
             }
         }
-            boolean ok= takeTurn(row, col);
-            if(ok==false){
-            System.out.println("That cell is already occupied. Try a different cell.");
-            continue; //same player tries again
-            }
+            // boolean ok= takeTurn(row, col);
+            // if(ok==false){
+            // System.out.println("That cell is already occupied. Try a different cell.");
+            // continue; //same player tries again
+            // }
+
             if(board.checkWin(currentPlayer.getSymbol())){
                 board.printBoard();
                 System.out.println(currentPlayer.getName() + " wins the game");
@@ -106,8 +111,5 @@ public class Game {
         return board.makeMove(row, col, currentPlayer.getSymbol());
     }
 
-    private boolean isGameOver() {
-        // check win or draw
-        return false;
-    }
+    
 }

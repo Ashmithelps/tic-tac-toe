@@ -25,6 +25,6 @@ String PlayerOneName=sc.nextLine();
         Game game = new Game(p1, p2);
         
         game.start();
-     
+     sc.close();
     }
 }

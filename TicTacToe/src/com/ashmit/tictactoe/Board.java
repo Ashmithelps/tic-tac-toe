@@ -73,7 +73,17 @@ public class Board {
 
     public boolean isDraw() {
         // return true if board is full and no winner
+       if(checkWin('X') || checkWin('O')){
         return false;
+       }
+       for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            if(grid[i][j]=='-'){
+                return false;
+            }
+        }
+       }
+        return true;
     }
 
     public boolean isCellEmpty(int row, int col) {
